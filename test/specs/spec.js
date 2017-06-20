@@ -4,7 +4,7 @@ describe('homepage', function() {
 
     it('it should have 31 studies in list', function () {
 
-        browser.url('http://www.cbioportal.org/beta');
+        browser.url('http://localhost:8080/');
 
         var studies = $(".styles-module__cancerStudyListContainer__12ru0 > ul > ul");
         
@@ -56,7 +56,7 @@ describe('patient page', function(){
 
     it('oncokb indicators show up and hovering produces oncocard', function(){
 
-        browser.url('http://www.cbioportal.org/beta/case.do#/patient?studyId=ucec_tcga_pub&caseId=TCGA-BK-A0CC');
+        browser.url('http://localhost:8080/case.do#/patient?studyId=ucec_tcga_pub&caseId=TCGA-BK-A0CC');
 
         var oncokbIndicator = $('.oncogenicIcon-module__oncogenic-icon-image__3ptbU');
         oncokbIndicator.waitForExist(5000);

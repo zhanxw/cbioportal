@@ -1,5 +1,6 @@
+var browserstack = require('browserstack-local');
+
 exports.config = {
-    
     //
     // ==================
     // Specify Test Files
@@ -44,7 +45,9 @@ exports.config = {
         // 5 instances get started at a time.
         maxInstances: 5,
         //
-        browserName: 'chrome'
+        browserName: 'chrome',
+        build: 'webdriver-browserstack',
+        'browserstack.local': true
     }],
     //
     // ===================
@@ -106,7 +109,9 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+    services: ['browserstack'],
+    user: process.env.BROWSERSTACK_USERNAME,
+    key: process.env.BROWSERSTACK_ACCESS_KEY,
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -234,4 +239,22 @@ exports.config = {
      */
     // onComplete: function(exitCode) {
     // }
+	// Code to start browserstack local before start of test
+	onPrepare: function (config, capabilities) {
+	  console.log("Connecting local");
+	  return new Promise(function(resolve, reject){
+	    exports.bs_local = new browserstack.Local();
+	    exports.bs_local.start({'key': exports.config.key }, function(error) {
+	  	if (error) return reject(error);
+	  	console.log('Connected. Now testing...');
+
+	  	resolve();
+	    });
+	  });
+	},
+
+	// Code to stop browserstack local after end of test
+	onComplete: function (capabilties, specs) {
+	  exports.bs_local.stop(function() {});
+	}
 }
