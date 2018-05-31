@@ -858,6 +858,15 @@ public class GlobalProperties {
             return true;
         }
     }
+    
+    public static boolean showSitemaps() {
+        String sitemaps = portalProperties.getProperty("sitemaps");
+        if (sitemaps.equals("true")) {
+            return true; // show hotspots by default
+        } else {
+            return false;
+        }
+    }
 
     public static boolean showCivic() {
         return showCivic;
