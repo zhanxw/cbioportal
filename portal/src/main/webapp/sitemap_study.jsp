@@ -5,6 +5,7 @@
 <%@ page import="org.json.simple.JSONObject" %>
 <%@ page import="org.json.simple.parser.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="javax.servlet.http.*" %>
 <%@ page import="org.mskcc.cbio.portal.util.GlobalProperties" %>
 
 <%
@@ -25,8 +26,14 @@ Object obj = new JSONParser().parse(json);
 JSONArray ja = (JSONArray) obj;   
 pageContext.setAttribute("patientList", ja);
 
+
+if (GlobalProperties.showSitemaps() == false) {
+    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+}
+
 %>
 
+<c:if test = "${GlobalProperties.showSitemaps()}">
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <c:forEach items="${patientList}" var="patient">
@@ -35,3 +42,4 @@ pageContext.setAttribute("patientList", ja);
           </url>
     </c:forEach>
 </sitemapindex>
+</c:if>

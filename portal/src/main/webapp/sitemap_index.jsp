@@ -5,6 +5,7 @@
 <%@ page import="org.json.simple.JSONObject" %>
 <%@ page import="org.json.simple.parser.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="javax.servlet.http.*" %>
 <%@ page import="org.mskcc.cbio.portal.util.GlobalProperties" %>
 
 <%
@@ -19,6 +20,11 @@ String json = (String)pageContext.getAttribute("dataJson");
 Object obj = new JSONParser().parse(json);
 JSONArray ja = (JSONArray) obj;   
 pageContext.setAttribute("mylist", ja);
+
+if (GlobalProperties.showSitemaps() == false) {
+    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+}
+
 %>
 <c:if test = "${GlobalProperties.showSitemaps()}">
    <?xml version="1.0" encoding="UTF-8"?>
