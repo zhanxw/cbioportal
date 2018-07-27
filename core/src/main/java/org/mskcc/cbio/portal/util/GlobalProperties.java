@@ -864,9 +864,18 @@ public class GlobalProperties {
     }
     
     public static boolean showSitemaps() {
-        return sitemaps;
-    }
-
+            String sitemaps = portalProperties.getProperty("sitemaps");
+            if (sitemaps==null) {
+                return true; // show sitemaps by default
+            }
+            
+            if(!sitemaps.isEmpty()) {
+                return Boolean.parseBoolean(sitemaps);
+            }else{
+                return true;
+            }
+        }
+    
     public static boolean showCivic() {
         return showCivic;
     }

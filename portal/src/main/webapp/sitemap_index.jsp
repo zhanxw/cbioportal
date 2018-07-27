@@ -10,7 +10,7 @@
 
 <%
 String protocol = (request.isSecure()) ? "https" : "http";
-pageContext.setAttribute("serverRoot", protocol + "://" + "www.cbioportal.org/beta");
+pageContext.setAttribute("serverRoot", protocol + "://" + request.getServerName());
 %>
 
 <c:import var="dataJson" url="${serverRoot}/api/studies"/>
@@ -24,6 +24,8 @@ pageContext.setAttribute("mylist", ja);
 if (GlobalProperties.showSitemaps() == false) {
     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 }
+
+
 
 %>
 <c:if test = "${GlobalProperties.showSitemaps()}">
