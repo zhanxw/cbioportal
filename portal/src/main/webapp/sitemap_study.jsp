@@ -17,17 +17,19 @@ pageContext.setAttribute("serverRoot", protocol + "://" + request.getServerName(
 
 %>
 
-<c:import var="patientJson" url="${serverRoot}/api/studies/${studyId}/patients"/>
+
+<c:if test = "${GlobalProperties.showSitemaps()}">
+   <c:import var="patientJson" url="${serverRoot}/api/studies/${studyId}/patients"/>
+</c:if>
 
 <%
 
-String json = (String)pageContext.getAttribute("patientJson");
-Object obj = new JSONParser().parse(json);
-JSONArray ja = (JSONArray) obj;   
-pageContext.setAttribute("patientList", ja);
-
-
-if (GlobalProperties.showSitemaps() == false) {
+if (GlobalProperties.showSitemaps()) {
+    String json = (String)pageContext.getAttribute("patientJson");
+    Object obj = new JSONParser().parse(json);
+    JSONArray ja = (JSONArray) obj;   
+    pageContext.setAttribute("patientList", ja);
+} else {
     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 }
 

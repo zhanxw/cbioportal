@@ -862,20 +862,11 @@ public class GlobalProperties {
             return true;
         }
     }
-    
+
     public static boolean showSitemaps() {
-            String sitemaps = portalProperties.getProperty("sitemaps");
-            if (sitemaps==null) {
-                return true; // show sitemaps by default
-            }
-            
-            if(!sitemaps.isEmpty()) {
-                return Boolean.parseBoolean(sitemaps);
-            }else{
-                return true;
-            }
-        }
-    
+       return sitemaps;
+    }
+
     public static boolean showCivic() {
         return showCivic;
     }

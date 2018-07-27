@@ -13,19 +13,19 @@ String protocol = (request.isSecure()) ? "https" : "http";
 pageContext.setAttribute("serverRoot", protocol + "://" + request.getServerName());
 %>
 
-<c:import var="dataJson" url="${serverRoot}/api/studies"/>
-
+<c:if test = "${GlobalProperties.showSitemaps()}">
+    <c:import var="dataJson" url="${serverRoot}/api/studies"/>
+</c:if>
 <%
-String json = (String)pageContext.getAttribute("dataJson");
-Object obj = new JSONParser().parse(json);
-JSONArray ja = (JSONArray) obj;   
-pageContext.setAttribute("mylist", ja);
 
-if (GlobalProperties.showSitemaps() == false) {
+if (GlobalProperties.showSitemaps()) {
+     String json = (String)pageContext.getAttribute("dataJson");
+       Object obj = new JSONParser().parse(json);
+       JSONArray ja = (JSONArray) obj;   
+       pageContext.setAttribute("mylist", ja);
+} else {
     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 }
-
-
 
 %>
 <c:if test = "${GlobalProperties.showSitemaps()}">
