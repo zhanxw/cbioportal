@@ -24,10 +24,14 @@ as our database is constantly being updated. Please report issues to cbioportal@
 
 The [previous Web API](http://www.cbioportal.org/web_api.jsp) offers services through the servlet `webservice.do` is no longer under active development and will be phasing out once this new API is released publicly.
 
-## API structure
+## API content and structure
 
-The API endpoints are documented at http://www.cbioportal.org/api/. Here we provide some additional information about the structure of the API with examples.
+The API endpoints are documented at http://www.cbioportal.org/api/. Here, we provide some additional information about the content and structure of the API with examples.
 
-- `Cancer Types` (`/cancer-types`) returns meta information about cancer types
+* `Cancer Types` returns meta information about cancer types
+  * `GET /cancer-types` returns all cancer types in the database. In cBioPortal.org, [OncoTree](http://oncotree.mskcc.org) is adopted as the ontology for cancer types. Note: not all cancer types have associated cancer studies.
+    * example: http://www.cbioportal.org/beta/api/cancer-types
+  * `/cancer-types/{cancerTypeId}` returns meta information about one cancer type.
+    * example: http://www.cbioportal.org/beta/api/cancer-types/brca
 
 
