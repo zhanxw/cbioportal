@@ -31,7 +31,7 @@ The API endpoints are documented at http://www.cbioportal.org/api/. Here, we pro
 * `Cancer Types` returns meta information about cancer types
   * `GET /cancer-types` returns all cancer types in the database. In cBioPortal.org, [OncoTree](http://oncotree.mskcc.org) is adopted as the ontology for cancer types. Note: not all cancer types have associated cancer studies.
     * example: http://www.cbioportal.org/beta/api/cancer-types
-  * `/cancer-types/{cancerTypeId}` returns meta information about one cancer type.
+  * `GET /cancer-types/{cancerTypeId}` returns meta information about one cancer type.
     * example: http://www.cbioportal.org/beta/api/cancer-types/brca
 
 
