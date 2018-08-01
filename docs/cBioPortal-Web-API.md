@@ -28,10 +28,17 @@ The [previous Web API](http://www.cbioportal.org/web_api.jsp) offers services th
 
 The API endpoints are documented at http://www.cbioportal.org/api/. Here, we provide some additional information about the content and structure of the API with examples.
 
-### `Cancer Types` returns meta information about cancer types
+### `Cancer Types` endpoint returns meta information about cancer types
   * `GET /cancer-types` returns all cancer types in the database. In cBioPortal.org, [OncoTree](http://oncotree.mskcc.org) is being used as the ontology for cancer types. Note: not all cancer types have associated cancer studies.
     * example: http://www.cbioportal.org/beta/api/cancer-types
   * `GET /cancer-types/{cancerTypeId}` returns meta information about one cancer type.
     * example: http://www.cbioportal.org/beta/api/cancer-types/brca
 
-
+### `Studies` endpoint returns meta information about cancer studies
+  * `GET /studies` returns all studies
+    * example: http://www.cbioportal.org/beta/api/studies
+  * `GET /studies/{studyId}` returns one study by study ID
+    * example: http://www.cbioportal.org/beta/api/studies/msk_impact_2017
+  * `POST /studies/fetch` returns studies by study IDs
+    * example: `curl -X POST "http://www.cbioportal.org/api/studies/fetch?projection=SUMMARY" -H "accept: application/json" -H "Content-Type: application/json" -d "[\"brca_tcga\",\"ucec_tcga\"]"`
+    
