@@ -28,17 +28,46 @@ The [previous Web API](http://www.cbioportal.org/web_api.jsp) offers services th
 
 The API endpoints are documented at http://www.cbioportal.org/api/. Here, we provide some additional information about the content and structure of the API with examples.
 
-### `Cancer Types` endpoint returns meta information about cancer types
+### `Cancer Types` endpoint returns meta information about cancer types.
   * `GET /cancer-types` returns all cancer types in the database. In cBioPortal.org, [OncoTree](http://oncotree.mskcc.org) is being used as the ontology for cancer types. Note: not all cancer types have associated cancer studies.
     * example: http://www.cbioportal.org/beta/api/cancer-types
   * `GET /cancer-types/{cancerTypeId}` returns meta information about one cancer type.
     * example: http://www.cbioportal.org/beta/api/cancer-types/brca
 
 ### `Studies` endpoint returns meta information about cancer studies
-  * `GET /studies` returns all studies
-    * example: http://www.cbioportal.org/beta/api/studies
-  * `GET /studies/{studyId}` returns one study by study ID
-    * example: http://www.cbioportal.org/beta/api/studies/msk_impact_2017
-  * `POST /studies/fetch` returns studies by study IDs
+  * `GET /studies` returns all studies.
+    * example: http://www.cbioportal.org/api/studies
+  * `GET /studies/{studyId}` returns one study by `studyId`.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017
+  * `POST /studies/fetch` returns studies by `studyIds`.
     * example: `curl -X POST "http://www.cbioportal.org/api/studies/fetch?projection=SUMMARY" -H "accept: application/json" -H "Content-Type: application/json" -d "[\"brca_tcga\",\"ucec_tcga\"]"`
     
+### `Patient` endpoint returns patient IDs and the study IDs that the patients belong to.
+  * `GET /studies/{studyId}/patients/{patientId}` returns a patient by `patientId` and `studyId`. Note: a patient is uniquely identified by both a `patientId` and a `studyId`.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/patients/P-0000004
+  * `GET /studies/{studyId}/patients` returns all patients in a study.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/patients
+  * `POST /patients/fetch` returns patients by `patientId`s and `studyId`s.
+  
+### `Sample` endpoint returns sample IDs and patient IDs that the samples belong to (and study IDs).
+  * `GET /studies/{studyId}/patients/{patientId}/samples` return all samples of a patient
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/patients/P-0001104/samples
+  * `GET /studies/{studyId}/samples` returns all samples in a study
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/samples
+  * `GET /studies/{studyId}/samples/{sampleId}` returns a sample by `sampleId` and `studyId`. Note: a sample is uniquely identified by both a `sampleId` and a `studyId`.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/samples/P-0001104-T01-IM3
+  * `POST /samples/fetch` returns samples by `patientId`s and `studyId`s, or `sampleListIds`.
+  
+### `Clinical Attributes` returns meta data of clinical attributes
+
+### `Clinical Data` returns clinical data of patients and samples
+
+### `Molecular Profiles` returns meta data of molecular profiles (e.g. mutations, copy number, and mRNA profiles) in studies
+
+### `Molecular Data` returns molecular data (e.g. copy number, and mRNA data) of samples
+
+### `Mutations` returns mutational data of samples
+
+### `Gene Panels` return gene panel information (e.g. MSK-IMPACT gene panels) to determine whether a sample is sequenced/profiled in a gene
+  
+  
