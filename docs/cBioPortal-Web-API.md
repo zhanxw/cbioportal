@@ -58,9 +58,22 @@ The API endpoints are documented at http://www.cbioportal.org/api/. Here, we pro
     * example: http://www.cbioportal.org/api/studies/msk_impact_2017/samples/P-0001104-T01-IM3
   * `POST /samples/fetch` returns samples by `patientId`s and `studyId`s, or `sampleListIds`.
   
-### `Clinical Attributes` returns meta data of clinical attributes
-
-### `Clinical Data` returns clinical data of patients and samples
+### `Clinical Attributes` returns meta data of clinical attributes.
+  * `GET /clinical-attributes` returns all clinical attributes.
+    * example:  http://www.cbioportal.org/api/clinical-attributes
+  * `GET /studies/{studyId}/clinical-attributes` returns all clinical attributes in a study.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/clinical-attributes
+  * `GET /studies/{studyId}/clinical-attributes/{clinicalAttributeId}` returns a clinical attribute.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/clinical-attributes/CANCER_TYPE
+  * `POST /clinical-attributes/fetch` returns clinical attributes by `studyId`s.
+  
+### `Clinical Data` returns clinical data of patients and samples.  Note: clinical data may link to a patient or a sample.
+  * `GET /studies/{studyId}/clinical-data` returns all clinical data in a study.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/clinical-data
+  * `GET /studies/{studyId}/patients/{patientId}/clinical-data` returns all clinical data of a patient.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/patients/P-0001104/clinical-data
+  * `GET /studies/{studyId}/samples/{sampleId}/clinical-data` returns all clinical data of a sample.
+    * example: http://www.cbioportal.org/api/studies/msk_impact_2017/samples/P-0001104-T01-IM3/clinical-data
 
 ### `Molecular Profiles` returns meta data of molecular profiles (e.g. mutations, copy number, and mRNA profiles) in studies
 
