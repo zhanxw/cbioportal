@@ -14,14 +14,13 @@
     <script>
         window.frontendConfig = {
             configurationServiceUrl:"//" + '<%=baseUrl%>' +  "/config_service.jsp",
-            sessionServiceUrl:'http://www.cbioportal.org/rc/api-legacy/proxy/session/',
             frontendUrl: '//'+ '<%=baseUrl%>/', 
-            appVersion: '<%=GlobalProperties.getAppVersion()%>',
             apiRoot: '//'+ '<%=baseUrl%>/',
-            baseUrl: '<%=baseUrl%>',
+
+            //baseUrl: '<%=baseUrl%>',
             basePath: '<%=request.getContextPath()%>',
-            googleAnalyticsProfile:'UA-85438068-3',
-              // customTabs:[
+            //googleAnalyticsProfile:'UA-85438068-3',
+            // customTabs:[
                         //     {
                         //         "title": "Custom Tab",
                         //         "location": "RESULTS_PAGE",
