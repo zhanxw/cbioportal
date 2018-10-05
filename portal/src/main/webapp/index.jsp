@@ -15,8 +15,7 @@
         window.frontendConfig = {
             configurationServiceUrl:"//" + '<%=baseUrl%>' +  "/config_service.jsp",
             frontendUrl: '//'+ '<%=baseUrl%>/', 
-            apiRoot: '//'+ '<%=baseUrl%>/',
-
+            apiRoot: '//'+ '<%=baseUrl%>/',          
             //baseUrl: '<%=baseUrl%>',
             basePath: '<%=request.getContextPath()%>',
             //googleAnalyticsProfile:'UA-85438068-3',
