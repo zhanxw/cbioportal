@@ -37,7 +37,6 @@
         <version>${project.version}</version>
         <scope>test</scope>
     </dependency>
-
     <!-- antisamy -->
     <dependency>
       <groupId>org.owasp</groupId>
