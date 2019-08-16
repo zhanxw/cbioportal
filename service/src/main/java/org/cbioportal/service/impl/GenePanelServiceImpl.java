@@ -90,11 +90,11 @@ public class GenePanelServiceImpl implements GenePanelService {
     @Override
 	public List<GenePanel> fetchGenePanels(List<String> genePanelIds, String projection) {
 
-        List<GenePanel> genePanels = genePanelRepository.fetchGenePanels(genePanelIds, projection);
+        List<GenePanel> genePanels = genePanelSparkRepository.fetchGenePanels(genePanelIds, projection);
         
         if (projection.equals("DETAILED")) {
 
-            List<GenePanelToGene> genePanelToGeneList = genePanelRepository.getGenesOfPanels(genePanels
+            List<GenePanelToGene> genePanelToGeneList = genePanelSparkRepository.getGenesOfPanels(genePanels
                 .stream().map(GenePanel::getStableId).collect(Collectors.toList()));
 
             genePanels.forEach(g -> g.setGenes(genePanelToGeneList.stream().filter(p -> p.getGenePanelId()

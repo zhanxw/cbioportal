@@ -45,12 +45,12 @@ public class ParquetLoader {
         }
     }
 
-    public Dataset<Row> loadCaseListFiles(SparkSession spark, Set<String> molecularProfileIds, boolean withStudyColumn) {
+    public Dataset<Row> loadCaseListFiles(SparkSession spark, Set<String> molecularProfileIds, boolean withStableId) {
         List<String> molecularProfileArr = molecularProfileIds.stream()
             .map(id -> PARQUET_DIR + ParquetConstants.CASE_LIST_DIR + id).collect(Collectors.toList());
         Seq<String> fileSeq = JavaConverters.asScalaBuffer(molecularProfileArr).toSeq();
 
-        if (withStudyColumn) {
+        if (withStableId) {
             UserDefinedFunction getStudyId = udf((String fullPath) -> {
                 String[] paths = fullPath.split("/");
                 return paths[paths.length - 2];
@@ -65,5 +65,16 @@ public class ParquetLoader {
                 .option("mergeSchema", true)
                 .parquet(fileSeq);
         }
+    }
+    
+    public Dataset<Row> loadGenePanelFiles(SparkSession spark, List<String> genePanelFiles) {
+
+        List<String> genePanelArr = genePanelFiles.stream()
+            .map(id -> PARQUET_DIR + ParquetConstants.GENE_PANEL_DIR + id).collect(Collectors.toList());
+        Seq<String> fileSeq = JavaConverters.asScalaBuffer(genePanelArr).toSeq();
+
+        return spark.read()
+            .option("mergeSchema", true)
+            .parquet(fileSeq);
     }
 }

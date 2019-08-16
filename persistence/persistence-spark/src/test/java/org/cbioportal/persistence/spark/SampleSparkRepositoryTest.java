@@ -11,8 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +20,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration("/testSparkContext.xml")
-@TestPropertySource("/testPortal.properties")
 @Configurable
 public class SampleSparkRepositoryTest {
 
@@ -32,7 +28,7 @@ public class SampleSparkRepositoryTest {
 
     @Mock
     private ParquetLoader parquetLoader;
-    
+
     @InjectMocks
     private SampleSparkRepository sampleSparkRepository;
 
@@ -91,7 +87,7 @@ public class SampleSparkRepositoryTest {
         when(ds.collectAsList()).thenReturn(res);
 
         List<Sample> result = sampleSparkRepository.fetchSamples(Arrays.asList("msk_impact_2017"), null, "ID");
-        
+
         Assert.assertEquals(1, result.size());
         Sample sample = result.get(0);
         Assert.assertEquals("msk_impact_2017", sample.getCancerStudyIdentifier());

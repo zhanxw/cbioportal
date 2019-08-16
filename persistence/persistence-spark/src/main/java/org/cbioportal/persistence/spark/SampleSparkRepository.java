@@ -79,6 +79,7 @@ public class SampleSparkRepository implements SampleRepository {
 
         Dataset<Row> samples = parquetLoader.loadStudyFiles(spark,
             new HashSet<>(studyIds), ParquetConstants.CLINICAL_SAMPLE, true);
+
         if (!CollectionUtils.isEmpty(sampleIds)) {
             samples = samples.where(samples.col("SAMPLE_ID").isin(sampleIds.toArray()));
         }
