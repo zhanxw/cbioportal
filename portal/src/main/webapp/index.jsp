@@ -59,7 +59,7 @@
 
     </script>
      
-    <script type="text/javascript" src="//<%=baseUrl%>/js/src/load-frontend.js?<%=GlobalProperties.getAppVersion()%>"></script>
+    <script type="text/javascript" src="<%=GlobalProperties.getFrontendUrl()%>/js/src/load-frontend.js?<%=GlobalProperties.getAppVersion()%>"></script>
           
     <script>
         window.frontendConfig.customTabs && window.frontendConfig.customTabs.forEach(function(tab){
